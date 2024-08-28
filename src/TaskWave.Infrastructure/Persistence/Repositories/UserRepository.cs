@@ -19,6 +19,11 @@ public class UserRepository(AppDbContext dbContext) : IUserRepository
         return await dbContext.Users.AnyAsync(x => x.Email == email, cancellationToken);
     }
 
+    public async Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken)
+    {
+        return await dbContext.Users.FirstOrDefaultAsync(x => x.Email.Equals(email), cancellationToken);
+    }
+
     public async Task<User?> GetByIdAsync(Ulid userId, CancellationToken cancellationToken)
     {
         return await dbContext.Users.FindAsync(userId, cancellationToken);
