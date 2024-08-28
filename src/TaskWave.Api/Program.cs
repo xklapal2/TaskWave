@@ -40,6 +40,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
         }
 
         _ = app.UseHttpsRedirection();
+        _ = app.UseAuthorization();
         _ = app.MapControllers();
 
         app.Run();

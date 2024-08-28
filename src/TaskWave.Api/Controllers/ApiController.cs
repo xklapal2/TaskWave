@@ -1,12 +1,13 @@
 using ErrorOr;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace TaskWave.Api.Controllers;
 
 [ApiController]
-// [Authorize]
+[Authorize]
 public class ApiController : ControllerBase
 {
     protected ActionResult Problem(List<Error> errors)

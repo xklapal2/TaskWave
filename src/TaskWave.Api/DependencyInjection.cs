@@ -6,6 +6,7 @@ public static class DependencyInjection
     {
         _ = services.AddControllers();
         _ = services.AddSwaggerGen();
+        _ = services.AddProblemDetails();
 
         return services;
     }
