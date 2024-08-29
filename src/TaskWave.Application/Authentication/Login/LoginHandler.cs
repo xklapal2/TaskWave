@@ -3,6 +3,8 @@ using ErrorOr;
 using MediatR;
 
 using TaskWave.Application.Common.Interfaces;
+using TaskWave.Application.Common.Security.Permissions;
+using TaskWave.Application.Common.Security.Roles;
 using TaskWave.Domain.Entities;
 
 namespace TaskWave.Application.Authentication.Login;
@@ -30,7 +32,7 @@ public class LoginQueryHandler : IRequestHandler<LoginCommand, ErrorOr<LoginResu
             return Error.Unauthorized(description: "Invalid email or password.");
         }
 
-        string token = _jwtTokenGenerator.GenerateToken(user.Id, user.FirstName, user.LastName, user.Email);
+        string token = _jwtTokenGenerator.GenerateToken(user.Id, user.FirstName, user.LastName, user.Email, [Permission.User.Create], [Role.Admin]);
 
         return new LoginResult(
             user.Id,
