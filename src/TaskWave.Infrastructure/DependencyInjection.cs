@@ -10,13 +10,19 @@ using TaskWave.Infrastructure.Persistence.Repositories;
 using TaskWave.Infrastructure.Security.TokenGenerator;
 using TaskWave.Infrastructure.Security.TokenValidation;
 
+using TaskWave.Infrastructure.Security;
+using TaskWave.Infrastructure.Security.CurrentUserProvider;
+using TaskWave.Infrastructure.Security.PolicyEnforcer;
+
 namespace TaskWave.Infrastructure;
 
 public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, ConfigurationManager configuration)
     {
-        _ = services.AddAuthentication(configuration)
+        _ = services.AddHttpContextAccessor()
+                    .AddAuthentication(configuration)
+                    .AddAuthorization()
                     .AddPersistence(configuration);
         return services;
     }
@@ -41,6 +47,15 @@ public static class DependencyInjection
             .ConfigureOptions<JwtBearerTokenValidationConfiguration>()
             .AddAuthentication(defaultScheme: JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer();
+
+        return services;
+    }
+
+    private static IServiceCollection AddAuthorization(this IServiceCollection services)
+    {
+        services.AddScoped<IAuthorizationService, AuthorizationService>();
+        services.AddScoped<ICurrentUserProvider, CurrentUserProvider>();
+        services.AddSingleton<IPolicyEnforcer, PolicyEnforcer>();
 
         return services;
     }
