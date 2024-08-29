@@ -1,0 +1,32 @@
+@controller = auth
+@host = http://localhost:5068
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVCIsImZhbWlseV9uYW1lIjoiR28iLCJlbWFpbCI6InRnb0BnbWFpbC5jb20iLCJpZCI6IjAxSjZEMk5aNzlXUjY1S0E5U1A4OVQ5NjQ1IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJwZXJtaXNzaW9ucyI6ImNyZWF0ZTp1c2VyIiwiZXhwIjoxNzI0OTY0MjA5LCJpc3MiOiJUYXNrV2F2ZSIsImF1ZCI6IlRhc2tXYXZlIn0.huZneH19xp3oOEzFsuOPQyoLeTNiJmzlvjBqapM14cQ
+
+# Create User
+
+POST {{host}}/users
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "firstName": "T",
+  "lastName": "Go",
+  "email": "tgo@taskwave.com",
+  "password": "never"
+}
+
+### LOGIN
+# "email":"sa@taskwave.com",
+# "email":"tgo@taskwave.com",
+
+POST {{host}}/{{controller}}/login
+Content-Type: application/json
+
+{
+    "email":"tgo@taskwave.com",
+    "password":"never-tell"
+}
+
+
+
+
