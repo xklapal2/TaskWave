@@ -1,11 +1,11 @@
 using System.Reflection;
 
-using TaskWave.Application.Common.Interfaces;
-using TaskWave.Application.Common.Security.Requests;
-
 using ErrorOr;
 
 using MediatR;
+
+using TaskWave.Application.Common.Interfaces;
+using TaskWave.Application.Common.Security.Requests;
 
 namespace TaskWave.Application.Common.Behaviors;
 

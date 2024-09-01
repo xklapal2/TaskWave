@@ -2,24 +2,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using TaskWave.Domain.Entities;
-using TaskWave.Infrastructure.Persistence.Converters;
+using TaskWave.Infrastructure.Persistence.Abstractions.Configurations;
 
 namespace TaskWave.Infrastructure.Persistence.Configurations;
 
-public class ConfigurationBuilder : IEntityTypeConfiguration<User>
+public class ConfigurationBuilder : EntityConfiguration<User>
 {
-    public void Configure(EntityTypeBuilder<User> builder)
+    public override void Configure(EntityTypeBuilder<User> builder)
     {
+        base.Configure(builder);
+
         builder.ToTable($"{nameof(User)}s");
-
-        builder.HasKey(u => u.Id);
-
-        builder.Property(u => u.Id)
-            .HasConversion(new UlidToStringConverter())
-            .ValueGeneratedNever();
-
-        builder.Property(u => u.Id)
-            .ValueGeneratedNever();
 
         builder
             .HasIndex(x => x.Email)

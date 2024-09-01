@@ -7,12 +7,14 @@ using Microsoft.Extensions.Logging;
 using TaskWave.Domain.Common.Abstractions;
 
 using TaskWave.Domain.Entities;
+using TaskWave.Domain.Entities.Groups;
 
 namespace TaskWave.Infrastructure.Persistence;
 
 public class AppDbContext(DbContextOptions options, IPublisher publisher, ILoggerFactory? loggerFactory = null) : DbContext(options)
 {
     public DbSet<User> Users { get; set; } = null!;
+    public DbSet<Group> Groups { get; set; } = null!;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

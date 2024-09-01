@@ -30,7 +30,7 @@ There is MariaDB used as a database storage for this solution.
 ##### Migrations
 
 ```shell
-dotnet ef migrations add UserBase -s src/TaskWave.Api -p src/TaskWave.Infrastructure -o Persistence/Migrations
+dotnet ef migrations add <migration-name> -s src/TaskWave.Api -p src/TaskWave.Infrastructure -o Persistence/Migrations
 ```
 
 ### Authentication

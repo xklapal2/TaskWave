@@ -1,6 +1,6 @@
 using TaskWave.Domain.Entities;
 
-namespace TaskWave.Application.Common.Interfaces;
+namespace TaskWave.Application.Common.Interfaces.Repositories;
 
 public interface IUserRepository
 {
