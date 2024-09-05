@@ -16,5 +16,5 @@ public record CreateUserCommand(
     string Password
 ) : IAuthorizeableRequest<ErrorOr<UserResult>>
 {
-    public Ulid UserId { get; set; }
+    public Ulid AuthUserId { get; set; }
 }

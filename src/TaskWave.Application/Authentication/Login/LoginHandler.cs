@@ -3,6 +3,7 @@ using ErrorOr;
 using MediatR;
 
 using TaskWave.Application.Common.Interfaces;
+using TaskWave.Application.Common.Interfaces.Repositories;
 using TaskWave.Application.Common.Security.Permissions;
 using TaskWave.Application.Common.Security.Roles;
 using TaskWave.Domain.Entities;

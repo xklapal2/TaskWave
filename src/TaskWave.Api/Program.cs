@@ -3,9 +3,8 @@ using Serilog;
 using TaskWave.Api;
 using TaskWave.Api.Common;
 using TaskWave.Api.Common.Http.RouteConstraints;
-using TaskWave.Infrastructure;
 using TaskWave.Application;
-
+using TaskWave.Infrastructure;
 using TaskWave.Infrastructure.Persistence;
 
 {

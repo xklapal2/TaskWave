@@ -1,21 +1,30 @@
+
 using ErrorOr;
 
-using MediatR;
-
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using TaskWave.Application.Authentication.Login;
 
-using TaskWave.Contracts.Authentication;
-
 namespace TaskWave.Api.Controllers;
 
-[Route("auth")]
-[AllowAnonymous]
-public class AuthController(ISender mediator) : ApiController
+#region Contracts
+public record LoginRequest(
+    string Email,
+    string Password
+);
+
+public record LoginResponse(
+    Ulid Id,
+    string FirstName,
+    string LastName,
+    string Email,
+    string Token
+);
+#endregion
+
+public partial class AuthController
 {
-    [HttpPost("login")]
+    [HttpPost]
     public async Task<IActionResult> Login(LoginRequest request)
     {
         LoginCommand command = new(
@@ -31,5 +40,6 @@ public class AuthController(ISender mediator) : ApiController
         );
     }
 
-    private static LoginResponse ResultToResponse(LoginResult result) => new(result.Id, result.FirstName, result.LastName, result.Email, result.Token);
+    private static LoginResponse ResultToResponse(LoginResult result)
+        => new(result.Id, result.FirstName, result.LastName, result.Email, result.Token);
 }

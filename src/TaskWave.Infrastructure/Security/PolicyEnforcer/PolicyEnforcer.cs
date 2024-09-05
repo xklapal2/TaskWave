@@ -22,7 +22,7 @@ public class PolicyEnforcer : IPolicyEnforcer
 
     private static ErrorOr<Success> SelfOrAdminPolicy<T>(IAuthorizeableRequest<T> request, CurrentUser currentUser)
     {
-        if (request.UserId == currentUser.Id || currentUser.Roles.Contains(Role.Admin))
+        if (request.AuthUserId == currentUser.Id || currentUser.Roles.Contains(Role.Admin))
         {
             return Result.Success;
         }

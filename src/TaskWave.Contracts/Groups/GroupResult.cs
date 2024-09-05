@@ -1,0 +1,2 @@
+namespace TaskWave.Contracts.Groups;
+
