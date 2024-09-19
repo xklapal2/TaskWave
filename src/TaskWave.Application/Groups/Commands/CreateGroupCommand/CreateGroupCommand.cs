@@ -13,5 +13,5 @@ public record CreateGroupCommand(
     string Name
 ) : IAuthorizeableRequest<ErrorOr<GroupResult>>
 {
-    public Ulid UserId { get; set; }
+    public Ulid AuthorizedUserId { get; set; }
 }
