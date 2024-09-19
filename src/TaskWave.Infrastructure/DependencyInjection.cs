@@ -13,6 +13,7 @@ using TaskWave.Infrastructure.Security.TokenValidation;
 using TaskWave.Infrastructure.Security;
 using TaskWave.Infrastructure.Security.CurrentUserProvider;
 using TaskWave.Infrastructure.Security.PolicyEnforcer;
+using TaskWave.Application.Common.Interfaces.Repositories;
 
 namespace TaskWave.Infrastructure;
 
@@ -33,6 +34,7 @@ public static class DependencyInjection
 
         // repositories
         _ = services.AddScoped<IUserRepository, UserRepository>();
+        _ = services.AddScoped<IGroupRepository, GroupRepository>();
 
         return services;
     }

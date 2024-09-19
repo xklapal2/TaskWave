@@ -11,7 +11,8 @@ public class UlidRouteConstraint : IRouteConstraint
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
     {
         return values.TryGetValue(routeKey, out object? value) &&
                 value is string strValue &&
