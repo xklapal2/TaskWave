@@ -3,17 +3,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using TaskWave.Application.Common.Interfaces;
-
+using TaskWave.Application.Common.Interfaces.Repositories;
 using TaskWave.Infrastructure.Persistence;
 using TaskWave.Infrastructure.Persistence.Repositories;
-
-using TaskWave.Infrastructure.Security.TokenGenerator;
-using TaskWave.Infrastructure.Security.TokenValidation;
-
 using TaskWave.Infrastructure.Security;
 using TaskWave.Infrastructure.Security.CurrentUserProvider;
 using TaskWave.Infrastructure.Security.PolicyEnforcer;
-using TaskWave.Application.Common.Interfaces.Repositories;
+using TaskWave.Infrastructure.Security.TokenGenerator;
+using TaskWave.Infrastructure.Security.TokenValidation;
 
 namespace TaskWave.Infrastructure;
 
