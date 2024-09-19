@@ -1,4 +1,4 @@
-namespace TaskWave.Contracts.Users;
+namespace TaskWave.Api.Contracts.Users;
 
 public record CreateUserResponse(
     Ulid Id,

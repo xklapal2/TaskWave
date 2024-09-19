@@ -7,11 +7,10 @@ The "TaskWave" project is focused on creating a system that facilitates the mana
 ```shell
 ├── TaskWave.Api
 │   ├── Common
+│   ├── Contracts
 │   ├── Controllers
 ├── TaskWave.Application
 │   ├── Common
-│   └── Users
-├── TaskWave.Contracts
 │   └── Users
 ├── TaskWave.Domain
 │   ├── Common

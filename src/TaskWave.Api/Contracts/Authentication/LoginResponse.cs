@@ -1,4 +1,4 @@
-namespace TaskWave.Contracts.Authentication;
+namespace TaskWave.Api.Contracts.Authentication;
 
 public record LoginResponse(
     Ulid Id,

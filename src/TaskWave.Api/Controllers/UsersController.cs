@@ -4,9 +4,9 @@ using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
 
+using TaskWave.Api.Contracts.Users;
 using TaskWave.Application.Users.Commands.CreateUserCommand;
 using TaskWave.Application.Users.Common;
-using TaskWave.Contracts.Users;
 
 namespace TaskWave.Api.Controllers;
 

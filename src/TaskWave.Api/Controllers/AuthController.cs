@@ -5,9 +5,9 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-using TaskWave.Application.Authentication.Login;
+using TaskWave.Api.Contracts.Authentication;
 
-using TaskWave.Contracts.Authentication;
+using TaskWave.Application.Authentication.Login;
 
 namespace TaskWave.Api.Controllers;
 
