@@ -8,7 +8,7 @@ using TaskWave.Application.Users.Common;
 
 namespace TaskWave.Application.Users.Commands.CreateUserCommand;
 
-[Authorize(Permissions = Permission.User.Get, Policies = Policy.SelfOrAdmin)]
+[Authorize(Permissions = Permission.User.Create, Policies = Policy.SelfOrAdmin)]
 public record CreateUserCommand(
     string FirstName,
     string LastName,

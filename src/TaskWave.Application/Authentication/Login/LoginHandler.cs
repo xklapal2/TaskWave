@@ -33,7 +33,14 @@ public class LoginQueryHandler : IRequestHandler<LoginCommand, ErrorOr<LoginResu
             return Error.Unauthorized(description: "Invalid email or password.");
         }
 
-        string token = _jwtTokenGenerator.GenerateToken(user.Id, user.FirstName, user.LastName, user.Email, [Permission.User.Create], [Role.Admin]);
+        string token = _jwtTokenGenerator.GenerateToken(
+            user.Id,
+            user.FirstName,
+            user.LastName,
+            user.Email,
+            [Permission.User.Create, Permission.Group.Create],
+            [Role.Admin]
+        );
 
         return new LoginResult(
             user.Id,

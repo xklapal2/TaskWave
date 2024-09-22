@@ -8,7 +8,7 @@ using TaskWave.Application.Groups.Common;
 
 namespace TaskWave.Application.Groups.Commands.CreateGroupCommand;
 
-[Authorize(Permissions = Permission.User.Get, Policies = Policy.SelfOrAdmin)]
+[Authorize(Permissions = Permission.Group.Create, Policies = Policy.SelfOrAdmin)]
 public record CreateGroupCommand(
     string Name
 ) : IAuthorizeableRequest<ErrorOr<GroupResult>>
