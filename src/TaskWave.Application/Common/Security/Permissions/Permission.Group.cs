@@ -6,5 +6,6 @@ public static partial class Permission
     {
         public const string Create = "create:group";
         public const string Get = "get:group";
+        public const string CreateGroupMember = "create:groupMember";
     }
 }

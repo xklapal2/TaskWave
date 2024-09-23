@@ -5,6 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 using TaskWave.Api.Contracts.Groups;
+using TaskWave.Application.Groups.Commands.AddGroupMember;
 using TaskWave.Application.Groups.Commands.CreateGroupCommand;
 using TaskWave.Application.Groups.Common;
 
@@ -25,6 +26,20 @@ public class GroupController(IMediator mediator) : ApiController
                 actionName: nameof(CreateGroup), // TODO: GetGroup
                 routeValues: new { group.GroupId },
                 value: group),
+            Problem
+        );
+    }
+
+    [HttpPost]
+    [Route("{groupId}/addMembers")]
+    public async Task<IActionResult> AddGroupMembers(AddGroupMembersRequest request)
+    {
+        AddGroupMemberCommand command = new(request.GroupId, request.UserIds);
+
+        ErrorOr<Success> result = await mediator.Send(command);
+
+        return result.Match(
+            _ => NoContent(),
             Problem
         );
     }

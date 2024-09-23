@@ -38,7 +38,11 @@ public class LoginQueryHandler : IRequestHandler<LoginCommand, ErrorOr<LoginResu
             user.FirstName,
             user.LastName,
             user.Email,
-            [Permission.User.Create, Permission.Group.Create],
+            [
+                Permission.User.Create,
+                Permission.Group.Create,
+                Permission.GroupMember.Create,
+            ],
             [Role.Admin]
         );
 
