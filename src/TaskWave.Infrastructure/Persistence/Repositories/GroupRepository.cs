@@ -1,4 +1,3 @@
-
 using Microsoft.EntityFrameworkCore;
 
 using TaskWave.Application.Common.Interfaces.Repositories;
@@ -8,6 +7,17 @@ namespace TaskWave.Infrastructure.Persistence.Repositories;
 
 public class GroupRepository(AppDbContext dbContext) : IGroupRepository
 {
+
+    // #######################################
+    // #####          QUERIES            #####
+    // #######################################
+    public async Task<bool> ExistsAsync(string groupName, CancellationToken cancellationToken)
+    {
+        return await dbContext.Groups
+                .AsNoTracking()
+                .AnyAsync(x => x.Name == groupName, cancellationToken);
+    }
+
     public async Task<Group> GetByIdAsync(Ulid groupId, CancellationToken cancellationToken)
     {
         return await dbContext.Groups
@@ -15,15 +25,17 @@ public class GroupRepository(AppDbContext dbContext) : IGroupRepository
             .FirstAsync(g => g.Id == groupId, cancellationToken);
     }
 
+    public Task<List<Group>> ListGroupsAsync(CancellationToken cancellationToken)
+    {
+        return dbContext.Groups.AsNoTracking().ToListAsync();
+    }
+
+    // #######################################
+    // #####          COMMANDS           #####
+    // #######################################
     public async Task AddAsync(Group group, CancellationToken cancellationToken)
     {
         await dbContext.Groups.AddAsync(group, cancellationToken);
-        await dbContext.SaveChangesAsync(cancellationToken);
-    }
-
-    public async Task UpdateAsync(Group group, CancellationToken cancellationToken)
-    {
-        dbContext.Groups.Update(group);
         await dbContext.SaveChangesAsync(cancellationToken);
     }
 
@@ -33,10 +45,9 @@ public class GroupRepository(AppDbContext dbContext) : IGroupRepository
         await dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<bool> ExistsAsync(string groupName, CancellationToken cancellationToken)
+    public async Task UpdateAsync(Group group, CancellationToken cancellationToken)
     {
-        return await dbContext.Groups
-                .AsNoTracking()
-                .AnyAsync(x => x.Name == groupName, cancellationToken);
+        dbContext.Groups.Update(group);
+        await dbContext.SaveChangesAsync(cancellationToken);
     }
 }

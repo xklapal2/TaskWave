@@ -5,9 +5,11 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 using TaskWave.Api.Contracts.Groups;
+using TaskWave.Api.Contracts.Groups.Common;
 using TaskWave.Application.Groups.Commands.AddGroupMember;
 using TaskWave.Application.Groups.Commands.CreateGroupCommand;
-using TaskWave.Application.Groups.Common;
+using TaskWave.Application.Groups.Queries.ListGroups;
+using TaskWave.Domain.Entities.Groups;
 
 namespace TaskWave.Api.Controllers;
 
@@ -19,13 +21,13 @@ public class GroupController(IMediator mediator) : ApiController
     {
         CreateGroupCommand command = new(request.Name);
 
-        ErrorOr<GroupResult> result = await mediator.Send(command);
+        ErrorOr<Group> result = await mediator.Send(command);
 
         return result.Match(
             group => CreatedAtAction(
                 actionName: nameof(CreateGroup), // TODO: GetGroup
-                routeValues: new { group.GroupId },
-                value: group),
+                routeValues: new { group.Id },
+                value: group.ToDto()),
             Problem
         );
     }
@@ -41,6 +43,17 @@ public class GroupController(IMediator mediator) : ApiController
         return result.Match(
             _ => NoContent(),
             Problem
+        );
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> ListGroups()
+    {
+        ErrorOr<List<Group>> result = await mediator.Send(new ListGroupsQuery());
+
+        return result.Match(
+           groups => Ok(groups.ConvertAll(x => x.ToDto())),
+           Problem
         );
     }
 }
