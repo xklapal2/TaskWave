@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using TaskWave.Api.Contracts.Users;
 using TaskWave.Application.Users.Commands.CreateUserCommand;
 using TaskWave.Application.Users.Common;
+using TaskWave.Application.Users.Queries.ListUsers;
+using TaskWave.Domain.Entities;
 
 namespace TaskWave.Api.Controllers;
 
@@ -30,6 +32,17 @@ public sealed class UsersController(IMediator mediator) : ApiController
                 routeValues: new { UserId = user.Id },
                 value: user),
             Problem
+        );
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> ListUsers()
+    {
+        ErrorOr<List<User>> result = await mediator.Send(new ListUsersQuery());
+
+        return result.Match(
+           users => Ok(users.ConvertAll(x => x.ToDto())),
+           Problem
         );
     }
 }

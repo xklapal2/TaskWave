@@ -1,4 +1,3 @@
-
 using Microsoft.EntityFrameworkCore;
 
 using TaskWave.Application.Common.Interfaces.Repositories;
@@ -8,12 +7,9 @@ namespace TaskWave.Infrastructure.Persistence.Repositories;
 
 public class UserRepository(AppDbContext dbContext) : IUserRepository
 {
-    public async Task AddAsync(User user, CancellationToken cancellationToken)
-    {
-        _ = await dbContext.AddAsync(user, cancellationToken);
-        _ = await dbContext.SaveChangesAsync(cancellationToken);
-    }
-
+    // #######################################
+    // #####          QUERIES            #####
+    // #######################################
     public async Task<bool> ExistsAsync(string email, CancellationToken cancellationToken)
     {
         return await dbContext.Users.AsNoTracking().AnyAsync(x => x.Email == email, cancellationToken);
@@ -27,5 +23,19 @@ public class UserRepository(AppDbContext dbContext) : IUserRepository
     public async Task<User?> GetByIdAsync(Ulid userId, CancellationToken cancellationToken)
     {
         return await dbContext.Users.FindAsync(userId, cancellationToken);
+    }
+
+    public Task<List<User>> ListUsersAsync(CancellationToken cancellationToken)
+    {
+        return dbContext.Users.ToListAsync();
+    }
+
+    // #######################################
+    // #####          COMMANDS           #####
+    // #######################################
+    public async Task AddAsync(User user, CancellationToken cancellationToken)
+    {
+        _ = await dbContext.AddAsync(user, cancellationToken);
+        _ = await dbContext.SaveChangesAsync(cancellationToken);
     }
 }

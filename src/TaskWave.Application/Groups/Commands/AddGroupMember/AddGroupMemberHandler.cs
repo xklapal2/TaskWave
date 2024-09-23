@@ -16,7 +16,7 @@ public class AddGroupMemberHandler(IGroupRepository groupRepository) : IRequestH
             return Error.NotFound(description: "Group not found.");
         }
 
-        foreach (Ulid userId in request.UserIds)
+        foreach (Ulid userId in request.UserIds) // TODO: It needs to rise a GroupMemberAddedEvent so system can catch it and add GroupMember also as ProjectMemeber to all projects where group is added as ProjectGroup
         {
             if (group.AddMember(userId))
             {

@@ -4,8 +4,16 @@ namespace TaskWave.Application.Common.Interfaces.Repositories;
 
 public interface IUserRepository
 {
-    Task AddAsync(User user, CancellationToken cancellationToken);
-    Task<User?> GetByIdAsync(Ulid userId, CancellationToken cancellationToken);
+    // #######################################
+    // #####          QUERIES            #####
+    // #######################################
     Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken);
     Task<bool> ExistsAsync(string email, CancellationToken cancellationToken);
+    Task<User?> GetByIdAsync(Ulid userId, CancellationToken cancellationToken);
+    Task<List<User>> ListUsersAsync(CancellationToken cancellationToken);
+
+    // #######################################
+    // #####          COMMANDS           #####
+    // #######################################
+    Task AddAsync(User user, CancellationToken cancellationToken);
 }
