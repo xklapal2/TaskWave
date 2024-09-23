@@ -3,15 +3,14 @@ using ErrorOr;
 using MediatR;
 
 using TaskWave.Application.Common.Interfaces.Repositories;
-using TaskWave.Application.Groups.Common;
 using TaskWave.Domain.Entities.Groups;
 
 namespace TaskWave.Application.Groups.Commands.CreateGroupCommand;
 
-public class CreateGroupCommandHandler(IGroupRepository groupRepository) : IRequestHandler<CreateGroupCommand, ErrorOr<GroupResult>>
+public class CreateGroupCommandHandler(IGroupRepository groupRepository) : IRequestHandler<CreateGroupCommand, ErrorOr<Group>>
 {
 
-    public async Task<ErrorOr<GroupResult>> Handle(CreateGroupCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<Group>> Handle(CreateGroupCommand request, CancellationToken cancellationToken)
     {
         if (await groupRepository.ExistsAsync(request.Name, cancellationToken))
         {
@@ -22,6 +21,6 @@ public class CreateGroupCommandHandler(IGroupRepository groupRepository) : IRequ
 
         await groupRepository.AddAsync(group, cancellationToken);
 
-        return GroupResult.FromGroup(group);
+        return group;
     }
 }

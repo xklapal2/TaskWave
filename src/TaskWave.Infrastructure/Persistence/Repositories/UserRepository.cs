@@ -27,7 +27,7 @@ public class UserRepository(AppDbContext dbContext) : IUserRepository
 
     public Task<List<User>> ListUsersAsync(CancellationToken cancellationToken)
     {
-        return dbContext.Users.ToListAsync();
+        return dbContext.Users.AsNoTracking().ToListAsync();
     }
 
     // #######################################

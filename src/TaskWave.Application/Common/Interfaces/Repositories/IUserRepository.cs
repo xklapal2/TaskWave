@@ -7,8 +7,8 @@ public interface IUserRepository
     // #######################################
     // #####          QUERIES            #####
     // #######################################
-    Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken);
     Task<bool> ExistsAsync(string email, CancellationToken cancellationToken);
+    Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken);
     Task<User?> GetByIdAsync(Ulid userId, CancellationToken cancellationToken);
     Task<List<User>> ListUsersAsync(CancellationToken cancellationToken);
 
