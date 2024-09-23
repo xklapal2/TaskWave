@@ -1,3 +1,4 @@
+using TaskWave.Application.Groups.Queries.GroupDetail;
 using TaskWave.Domain.Entities.Groups;
 
 namespace TaskWave.Application.Common.Interfaces.Repositories;
@@ -10,6 +11,7 @@ public interface IGroupRepository
     Task<bool> ExistsAsync(string groupName, CancellationToken cancellationToken);
     Task<Group> GetByIdAsync(Ulid groupId, CancellationToken cancellationToken);
     Task<List<Group>> ListGroupsAsync(CancellationToken cancellationToken);
+    Task<GroupDetail?> GroupDetailAsync(Ulid id, CancellationToken cancellationToken);
 
     // #######################################
     // #####          COMMANDS           #####

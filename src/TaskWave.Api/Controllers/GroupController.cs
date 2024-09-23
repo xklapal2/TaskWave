@@ -8,6 +8,7 @@ using TaskWave.Api.Contracts.Groups;
 using TaskWave.Api.Contracts.Groups.Common;
 using TaskWave.Application.Groups.Commands.AddGroupMember;
 using TaskWave.Application.Groups.Commands.CreateGroupCommand;
+using TaskWave.Application.Groups.Queries.GroupDetail;
 using TaskWave.Application.Groups.Queries.ListGroups;
 using TaskWave.Domain.Entities.Groups;
 
@@ -44,6 +45,14 @@ public class GroupController(IMediator mediator) : ApiController
             _ => NoContent(),
             Problem
         );
+    }
+
+    [HttpGet]
+    [Route("{groupId}/detail")]
+    public async Task<IActionResult> GroupDetail(Ulid groupId)
+    {
+        ErrorOr<GroupDetail> result = await mediator.Send(new GroupDetailQuery(groupId));
+        return result.Match(Ok, Problem);
     }
 
     [HttpGet]
